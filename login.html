@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <title>Car Rental Login</title>
+    <style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    color: #333;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ff7e5f;
+}
+
+.input-container {
+    margin-bottom: 15px;
+    position: relative;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 35px;
+    cursor: pointer;
+    font-size: 1.1em;
+    color: #888;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff7e5f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #feb47b;
+}
+
+#errorMessage {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 10px;
+    text-align: center;
+}
+
+@media (max-width: 500px) {
+    .login-container {
+        width: 90%;
+    }
+}
+.loading-spinner {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 8px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 8px solid #3498db;
+      width: 60px;
+      height: 60px;
+      animation: spin 3s linear infinite;
+      display: none;
+      z-index: 2001;
+    }
+
+    /* Overlay styling */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* semi-transparent background */
+      display: none;
+      z-index: 2000; /* Below the spinner */
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+a {
+
+    color: #ff7e5f;
+    text-decoration: none;
+}
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="overlay" id="overlay"></div>
+<div class="loading-spinner" id="loadingSpinner"></div>
+
+        <form id="loginForm" onsubmit="return validateForm()" method="post">
+            <a href="index.html" onclick="showLoading()">&#xf965; goto home</a>
+            <h2>Car Rental Login</h2>
+            <div class="input-container">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username">
+            </div>
+            <div class="input-container">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password">
+                <span class="password-toggle" onclick="togglePasswordVisibility()">👁️</span>
+            </div>
+            <button type="submit">Login</button>
+            <p id="errorMessage"></p>
+        </form>
+    </div>
+    <script>
+        let loadingTimeout;
+
+        function validateForm() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Username validation
+            if (username === "") {
+                errorMessage.textContent = "Username is required.";
+                return false;
+            }
+
+            // Password validation
+            const passwordPattern = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[\W_]).{6,7}$/;
+
+            if (password === "") {
+                errorMessage.textContent = "Password is required.";
+                return false;
+            } else if (!passwordPattern.test(password)) {
+                errorMessage.textContent = "Password must be 6-7 characters, contain at least one uppercase letter, one number, and one special character.";
+                return false;
+            }
+
+            // Clear any previous error messages
+            errorMessage.textContent = "";
+            return true;  // Proceed with form submission
+        }
+
+        function togglePasswordVisibility() {
+            const passwordField = document.getElementById('password');
+            const toggleIcon = document.querySelector('.password-toggle');
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                toggleIcon.textContent = "🙈";  // Change icon to hide
+            } else {
+                passwordField.type = "password";
+                toggleIcon.textContent = "👁️";  // Change icon to show
+            }
+        }
+        function showLoading() {
+    const loadingSpinner = document.getElementById("loadingSpinner");
+    const overlay = document.getElementById("overlay");
+
+    overlay.style.display = "block"; // Show overlay
+    loadingSpinner.style.display = "block"; // Show spinner
+
+    // Set a timeout to trigger server timeout alert
+    loadingTimeout = setTimeout(() => {
+        loadingSpinner.style.display = "none";
+        overlay.style.display = "none"; // Hide overlay
+        alert("Request timeout. Please try again later.");
+    }, 5000); // 5 seconds for demonstration (can be adjusted)
+
+    // Simulate loading completion after 2 seconds
+    setTimeout(() => {
+        loadingSpinner.style.display = "none";
+        overlay.style.display = "none"; // Hide overlay
+        
+        // Clear the timeout if loading completed successfully
+        clearTimeout(loadingTimeout);
+    }, 8000); // Simulates a 2-second loading time (adjust to your actual needs)
+}
+    </script>
+</body>
+</html>
