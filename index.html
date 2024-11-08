@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title></title>
+  <title>car for you</title>
   <style>
     /* Reset margin and padding */
     * {
@@ -357,61 +357,59 @@
   </div>
   <p>&copy; 2024 Cars List. All Rights Reserved.</p>
 </footer>
-
 <script>
-  let loadingTimeout;
-  let isMenuOpen = false;
-  let currentPage = window.location.pathname; // Track the current page path when loading starts
+let loadingTimeout;
+let isMenuOpen = false;
+let currentPage = window.location.pathname; // Initial page path
 
-  function toggleMenu() {
-    const menuDropdown = document.getElementById("menuDropdown");
-    const menuButton = document.querySelector(".menu-button");
+function toggleMenu() {
+  const menuDropdown = document.getElementById("menuDropdown");
+  const menuButton = document.querySelector(".menu-button");
 
-    menuDropdown.style.display = menuDropdown.style.display === "block" ? "none" : "block";
-    
-    if (isMenuOpen) {
-      menuButton.style.borderColor = "red";
-      menuButton.style.color = "red";
-    } else {
-      menuButton.style.borderColor = "green";
-      menuButton.style.color = "green";
+  menuDropdown.style.display = menuDropdown.style.display === "block" ? "none" : "block";
+
+  if (isMenuOpen) {
+    menuButton.style.borderColor = "red";
+    menuButton.style.color = "red";
+  } else {
+    menuButton.style.borderColor = "green";
+    menuButton.style.color = "green";
+  }
+
+  isMenuOpen = !isMenuOpen;
+}
+
+function showLoading() {
+  const loadingSpinner = document.getElementById("loadingSpinner");
+  const overlay = document.getElementById("overlay");
+
+  overlay.style.display = "block"; // Show overlay
+  loadingSpinner.style.display = "block"; // Show spinner
+
+  // Save the current page when loading starts
+  currentPage = window.location.pathname;
+
+  // Set a timeout to trigger server timeout alert if the page hasn't changed
+  loadingTimeout = setTimeout(() => {
+    // Only show the alert if the page hasn't changed
+    if (window.location.pathname === currentPage) {
+      loadingSpinner.style.display = "none";
+      overlay.style.display = "none"; // Hide overlay
+      alert("Request timeout. Please try again later.");
     }
+  }, 5000); // Adjust this timeout as needed
 
-    isMenuOpen = !isMenuOpen;
-  }
+  // Hide the spinner after the loading completes or if the page changes
+  setTimeout(() => {
+    if (window.location.pathname === currentPage) {
+      loadingSpinner.style.display = "none";
+      overlay.style.display = "none"; // Hide overlay
 
-  function showLoading() {
-    const loadingSpinner = document.getElementById("loadingSpinner");
-    const overlay = document.getElementById("overlay");
-
-    overlay.style.display = "block"; // Show overlay
-    loadingSpinner.style.display = "block"; // Show spinner
-
-    // Set a timeout to trigger server timeout alert if the page hasn't changed
-    loadingTimeout = setTimeout(() => {
-        // Only show the alert if the page hasn't changed
-        if (window.location.pathname === currentPage) {
-          loadingSpinner.style.display = "none";
-          overlay.style.display = "none"; // Hide overlay
-          alert("Request timeout. Please try again later.");
-        }
-    }, 5000); // 5 seconds for demonstration (can be adjusted)
-
-    // Simulate loading completion after 2 seconds (adjust this based on your actual needs)
-    setTimeout(() => {
-        // Check if page is still the same before hiding spinner
-        if (window.location.pathname === currentPage) {
-            loadingSpinner.style.display = "none";
-            overlay.style.display = "none"; // Hide overlay
-            
-            // Clear the timeout if loading completed successfully
-            clearTimeout(loadingTimeout);
-        }
-    }, 7000); // Simulates a 2-second loading time (adjust to your actual needs)
-  }
+      // Clear the timeout if loading completed successfully
+      clearTimeout(loadingTimeout);
+    }
+  }, 7000); // Adjust this to simulate the actual loading time
+}
 </script>
-
-
-  
 </body>
 </html>
