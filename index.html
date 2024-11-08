@@ -257,8 +257,8 @@
 <div class="menu-container">
   <button class="menu-button" onclick="toggleMenu()">Menu</button>
   <div class="dropdown" id="menuDropdown">
-    <a href="login.html" onclick="showLoading()">Login</a>
-    <a href="registeration.html" onclick="showLoading()">Register</a>
+    <a href="login.html" target="_blank" onclick="showLoading()">Login</a>
+    <a href="registeration.html" target="_blank" onclick="showLoading()">Register</a>
     <a href="#contact" onclick="showLoading()">Contact</a>
     <a href="#about" onclick="showLoading()">About</a>
   </div>
@@ -410,22 +410,6 @@ function showLoading() {
     }
   }, 7000); // Adjust this to simulate the actual loading time
 }
-function loadPage(url) {
-  fetch(url)
-    .then(response => response.text())
-    .then(html => {
-      document.body.innerHTML = html;
-      history.pushState(null, null, url); // Update URL without page reload
-    })
-    .catch(error => console.error('Error loading page:', error));
-}
-
-// Listening for popstate event to handle back/forward navigation
-window.addEventListener('popstate', () => {
-  loadPage(window.location.pathname);
-});
-
-
 </script>
 </body>
 </html>
