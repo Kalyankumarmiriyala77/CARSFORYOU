@@ -410,6 +410,32 @@ function showLoading() {
     }
   }, 7000); // Adjust this to simulate the actual loading time
 }
+document.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', event => {
+    const href = link.getAttribute('href');
+    
+    // Check if it's a link within the current page (a section or tab)
+    if (href.startsWith('#')) {
+      event.preventDefault();
+      document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+    } else if (href.endsWith('.html')) {
+      // For navigation to internal pages, fetch content and update it dynamically here
+      event.preventDefault();
+      showLoading();
+      // Use AJAX/fetch to load content and update the page without reload
+      fetch(href)
+        .then(response => response.text())
+        .then(html => {
+          document.body.innerHTML = html;
+          history.pushState(null, null, href);
+        })
+        .finally(() => {
+          hideLoading();
+        });
+    }
+  });
+});
+
 </script>
 </body>
 </html>
