@@ -418,7 +418,7 @@ document.querySelectorAll('a').forEach(link => {
     if (href.startsWith('#')) {
       event.preventDefault();
       document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
-    } else if (href.endsWith('login.html')) {
+    } else if (href.endsWith('.html')) {
       // For navigation to internal pages, fetch content and update it dynamically here
       event.preventDefault();
       showLoading();
