@@ -383,10 +383,13 @@ function showLoading() {
   const loadingSpinner = document.getElementById("loadingSpinner");
   const overlay = document.getElementById("overlay");
 
+  // Clear any previous timeout to prevent duplicate alerts
+  clearTimeout(loadingTimeout);
+
   overlay.style.display = "block"; // Show overlay
   loadingSpinner.style.display = "block"; // Show spinner
 
-  // Save the current page when loading starts
+  // Save the current page path when loading starts
   currentPage = window.location.pathname;
 
   // Set a timeout to hide the spinner and overlay if the page hasn't changed
@@ -398,6 +401,14 @@ function showLoading() {
     }
   }, 3000); // Adjust this timeout as needed  
 }
+
+// Optional: Clear spinner when navigating with back/forward
+window.addEventListener("popstate", () => {
+  clearTimeout(loadingTimeout); // Clear the timeout if user uses back/forward navigation
+  document.getElementById("loadingSpinner").style.display = "none";
+  document.getElementById("overlay").style.display = "none";
+});
+
 
 </script>
 </script>
