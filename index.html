@@ -371,15 +371,14 @@ function toggleMenu() {
 
   isMenuOpen = !isMenuOpen;
 }
-function showLoading() {
+
+function showLoading(url) {
   document.getElementById("loadingOverlay").style.display = "flex";
   setTimeout(() => {
     // Simulate loading time before redirecting
-    // In a real application, you would handle the navigation here
-    document.getElementById("loadingOverlay").style.display = "none";
+    window.location.href = url; // Navigate to the new URL
   }, 2000); // Adjust the time as needed
 }
 </script>
-
 </body>
 </html>
