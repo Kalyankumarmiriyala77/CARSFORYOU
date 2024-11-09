@@ -92,38 +92,6 @@ button:hover {
         width: 90%;
     }
 }
-.loading-spinner {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      border: 8px solid #f3f3f3;
-      border-radius: 50%;
-      border-top: 8px solid #3498db;
-      width: 60px;
-      height: 60px;
-      animation: spin 3s linear infinite;
-      display: none;
-      z-index: 2001;
-    }
-
-    /* Overlay styling */
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5); /* semi-transparent background */
-      display: none;
-      z-index: 2000; /* Below the spinner */
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
 a {
 
     color: #ff7e5f;
@@ -133,11 +101,8 @@ a {
 </head>
 <body>
     <div class="login-container">
-        <div class="overlay" id="overlay"></div>
-<div class="loading-spinner" id="loadingSpinner"></div>
-
         <form id="loginForm" onsubmit="return validateForm()" method="post">
-            <a href="index.html" onclick="showLoading()">&#xf965; goto home</a>
+            <a href="index.html">&#xf965; goto home</a>
             <h2>Car Rental Login</h2>
             <div class="input-container">
                 <label for="username">Username</label>
@@ -194,29 +159,6 @@ a {
                 toggleIcon.textContent = "👁️";  // Change icon to show
             }
         }
-        function showLoading() {
-    const loadingSpinner = document.getElementById("loadingSpinner");
-    const overlay = document.getElementById("overlay");
-
-    overlay.style.display = "block"; // Show overlay
-    loadingSpinner.style.display = "block"; // Show spinner
-
-    // Set a timeout to trigger server timeout alert
-    loadingTimeout = setTimeout(() => {
-        loadingSpinner.style.display = "none";
-        overlay.style.display = "none"; // Hide overlay
-        alert("Request timeout. Please try again later.");
-    }, 5000); // 5 seconds for demonstration (can be adjusted)
-
-    // Simulate loading completion after 2 seconds
-    setTimeout(() => {
-        loadingSpinner.style.display = "none";
-        overlay.style.display = "none"; // Hide overlay
-        
-        // Clear the timeout if loading completed successfully
-        clearTimeout(loadingTimeout);
-    }, 8000); // Simulates a 2-second loading time (adjust to your actual needs)
-}
     </script>
 </body>
 </html>
