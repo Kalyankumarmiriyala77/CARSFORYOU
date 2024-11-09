@@ -257,8 +257,8 @@
 <div class="menu-container">
   <button class="menu-button" onclick="toggleMenu()">Menu</button>
   <div class="dropdown" id="menuDropdown">
-    <a href="login.html" target="_blank" onclick="showLoading()">Login</a>
-    <a href="registeration.html" target="_blank" onclick="showLoading()">Register</a>
+    <a href="login.html"  onclick="showLoading()">Login</a>
+    <a href="registeration.html"  onclick="showLoading()">Register</a>
     <a href="#contact" onclick="showLoading()">Contact</a>
     <a href="#about" onclick="showLoading()">About</a>
   </div>
@@ -344,7 +344,7 @@
     </div>
     <div>
       <h3>Quick Links</h3>
-      <a href="#login" onclick="showLoading()">Login</a> | 
+      <a href="#login.html" onclick="showLoading()">Login</a> | 
       <a href="registeration.html" onclick="showLoading()">Register</a> | 
       <a href="#contact" onclick="showLoading()">Contact</a> | 
       <a href="#about" onclick="showLoading()">About</a>
@@ -360,7 +360,6 @@
 <script>
 let loadingTimeout;
 let isMenuOpen = false;
-let currentPage = window.location.pathname; // Initial page path
 
 function toggleMenu() {
   const menuDropdown = document.getElementById("menuDropdown");
@@ -383,33 +382,31 @@ function showLoading() {
   const loadingSpinner = document.getElementById("loadingSpinner");
   const overlay = document.getElementById("overlay");
 
-  overlay.style.display = "block"; // Show overlay
-  loadingSpinner.style.display = "block"; // Show spinner
+  // Show overlay and spinner
+  overlay.style.display = "block";
+  loadingSpinner.style.display = "block";
 
-  // Save the current page when loading starts
-  currentPage = window.location.pathname;
-
-  // Set a timeout to trigger server timeout alert if the page hasn't changed
+  // Set a timeout to show an error message if the navigation takes too long
   loadingTimeout = setTimeout(() => {
-    // Only show the alert if the page hasn't changed
-    if (window.location.pathname === currentPage) {
-      loadingSpinner.style.display = "none";
-      overlay.style.display = "none"; // Hide overlay
-      alert("Request timeout. Please try again later.");
-    }
-  }, 5000); // Adjust this timeout as needed
-
-  // Hide the spinner after the loading completes or if the page changes
-  setTimeout(() => {
-    if (window.location.pathname === currentPage) {
-      loadingSpinner.style.display = "none";
-      overlay.style.display = "none"; // Hide overlay
-
-      // Clear the timeout if loading completed successfully
-      clearTimeout(loadingTimeout);
-    }
-  }, 7000); // Adjust this to simulate the actual loading time
+    loadingSpinner.style.display = "none";
+    overlay.style.display = "none";
+    alert("Request timeout. Please try again later.");
+  }, 5000);
 }
+
+// Clear loader when page fully loads
+window.onload = function() {
+  const loadingSpinner = document.getElementById("loadingSpinner");
+  const overlay = document.getElementById("overlay");
+
+  // Hide loader elements
+  loadingSpinner.style.display = "none";
+  overlay.style.display = "none";
+
+  // Clear any timeout to prevent alert
+  clearTimeout(loadingTimeout);
+};
+
 </script>
 </body>
 </html>
