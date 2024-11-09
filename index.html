@@ -361,12 +361,6 @@
 let loadingTimeout;
 let isMenuOpen = false;
 let currentPage = window.location.pathname; // Initial page path
-let navigationDetected = false;
-
-window.addEventListener("popstate", () => {
-  navigationDetected = true; // Flag that the navigation occurred (back/forward button pressed)
-  hideLoadingSpinner();
-});
 
 function toggleMenu() {
   const menuDropdown = document.getElementById("menuDropdown");
@@ -384,37 +378,29 @@ function toggleMenu() {
 
   isMenuOpen = !isMenuOpen;
 }
-
 function showLoading() {
-  const loadingSpinner = document.getElementById("loadingSpinner");
-  const overlay = document.getElementById("overlay");
+    const loadingSpinner = document.getElementById("loadingSpinner");
+    const overlay = document.getElementById("overlay");
 
-  overlay.style.display = "block"; // Show overlay
-  loadingSpinner.style.display = "block"; // Show spinner
+    overlay.style.display = "block"; // Show overlay
+    loadingSpinner.style.display = "block"; // Show spinner
 
-  navigationDetected = false; // Reset navigation flag
-  currentPage = window.location.pathname; // Save the current page path
+    // Set a timeout to trigger server timeout alert
+   // loadingTimeout = setTimeout(() => {
+       // loadingSpinner.style.display = "none";
+    //    overlay.style.display = "none"; // Hide overlay
+      //  alert("Request timeout. Please try again later.");
+ //   }, 5000); // 5 seconds for demonstration (can be adjusted)
 
-  // Set a timeout to hide the spinner and overlay if the page hasn't changed
-  loadingTimeout = setTimeout(() => {
-    // Only show the timeout message if no navigation has occurred and the page hasn't changed
-    if (!navigationDetected && window.location.pathname === currentPage) {
-      hideLoadingSpinner();
-      alert("Server Timeout: The page did not load as expected.");
-    }
-  }, 3000); // Adjust this timeout as needed
+    // Simulate loading completion after 2 seconds
+    setTimeout(() => {
+        loadingSpinner.style.display = "none";
+        overlay.style.display = "none"; // Hide overlay
+        
+        // Clear the timeout if loading completed successfully
+        clearTimeout(loadingTimeout);
+    }, 8000); // Simulates a 2-second loading time (adjust to your actual needs)
 }
-
-function hideLoadingSpinner() {
-  const loadingSpinner = document.getElementById("loadingSpinner");
-  const overlay = document.getElementById("overlay");
-
-  loadingSpinner.style.display = "none";
-  overlay.style.display = "none";
-  clearTimeout(loadingTimeout); // Clear timeout to avoid duplicate messages
-}
-
-
 </script>
 </script>
 </body>
