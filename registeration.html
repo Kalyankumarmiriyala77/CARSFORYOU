@@ -5,15 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Rental Registration</title>
     <style>
+        :root {
+            --primary-color: #47f109;
+            --secondary-color: #feb47b;
+            --error-color: red;
+            --background-image: url('https://i.ibb.co/fSFLp5n/background.webp');
+            --font-family: Arial, sans-serif;
+            --box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            --text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
+            font-family: var(--font-family);
         }
 
         body {
-            background-image: url('https://i.ibb.co/fSFLp5n/background.webp');
+            background-image: var(--background-image);
             background-size: cover; 
             background-position: center center; 
             background-repeat: no-repeat; 
@@ -21,7 +31,8 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            color: #47f109;
+            color: var(--primary-color);
+            text-shadow: var(--text-shadow);
         }
 
         .registration-container {
@@ -30,13 +41,14 @@
             padding: 20px;
             background: transparent;
             border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--box-shadow);
         }
 
         h2 {
             text-align: center;
             margin-bottom: 20px;
-            color: #47f109;
+            color: var(--primary-color);
+            text-shadow: var(--text-shadow); /* Adding text shadow */
         }
 
         .input-container {
@@ -61,7 +73,7 @@
         .password-toggle {
             position: absolute;
             right: 10px;
-            top: 35px;
+            top: 30px;
             cursor: pointer;
             font-size: 1.1em;
             color: #888;
@@ -70,7 +82,7 @@
         button {
             width: 100%;
             padding: 10px;
-            background-color: #47f109;
+            background-color: var(--primary-color);
             color: white;
             border: none;
             border-radius: 5px;
@@ -79,14 +91,15 @@
         }
 
         button:hover {
-            background-color: #feb47b;
+            background-color: var(--secondary-color);
         }
 
         #errorMessage {
-            color: red;
+            color: var(--error-color);
             font-size: 0.9em;
             margin-top: 10px;
             text-align: center;
+            text-shadow: var(--text-shadow);
         }
 
         @media (max-width: 500px) {
