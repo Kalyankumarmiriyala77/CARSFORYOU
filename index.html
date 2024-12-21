@@ -18,6 +18,33 @@
         flex-direction: column;
         min-height: 100vh;
     }
+     /* Loader styles */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    .loader {
+      border: 8px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 8px solid #0a17b0c4;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
 
     /* Sticky header styling */
     header {
@@ -306,11 +333,42 @@
   </div>
   <p>&copy; 2024 Cars List. All Rights Reserved.</p>
 </footer>
+ <!-- Loader overlay -->
+ <div class="overlay" id="overlay">
+  <div class="loader"></div>
+</div>
 <script>
    function toggleNav() {
       const nav = document.getElementById('nav');
-      nav.classList.toggle('active');
+      nav.classList.toggle('active'); 
     }
+    // Function to show loader when navigation links are clicked
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        const overlay = document.getElementById('overlay');
+        overlay.style.display = 'flex';
+
+         // Simulate a server call or action completion
+      const actionComplete = new Promise((resolve, reject) => {
+        // Simulate a delay, replace with actual action
+        setTimeout(() => {
+          const serverSuccess = Math.random() > 0.5; // Simulate success or failure
+          serverSuccess ? resolve() : reject();
+        }, 2000); // Simulate server processing time
+      });
+        // Handle success or failure of action
+        actionComplete
+        .then(() => {
+          overlay.style.display = 'none';
+          // Simulate navigation or action
+          window.location.href = link.href;
+        })
+        .catch(() => {
+          overlay.style.display = 'none';
+          alert('Server time is over. Please try again later.');
+        });
+    });
+  });
 </script>
 </body>
 </html>
