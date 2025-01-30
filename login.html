@@ -32,7 +32,6 @@ body {
     align-items: center;
     height: 100vh;
     color:  var(--primary-color);
-    text-shadow: var(--text-shadow);
 
 }
 
@@ -40,7 +39,7 @@ body {
     width: 100%;
     max-width: 400px;
     padding: 20px;
-    background: transparent;
+    background: var(--secondary-color);
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -49,7 +48,6 @@ h2 {
     text-align: center;
     margin-bottom: 20px;
     color: var(--primary-color);
-    text-shadow: var(--text-shadow);
 }
 
 .input-container {
@@ -93,7 +91,7 @@ button {
 }
 
 button:hover {
-    background-color: #feb47b;
+    background-color: #ef3107;
 }
 
 #errorMessage {
@@ -101,7 +99,6 @@ button:hover {
     font-size: 0.9em;
     margin-top: 10px;
     text-align: center;
-    text-shadow: var(--text-shadow);
 }
 
 @media (max-width: 500px) {
@@ -123,11 +120,11 @@ a {
             <h2>Car Rental Login</h2>
             <div class="input-container">
                 <label for="username">Username</label>
-                <input type="text" id="username" name="username" placeholder="Enter your username">
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
             </div>
             <div class="input-container">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password">
+                <input type="password" id="password" name="password" placeholder="Enter your password" re>
                 <span class="password-toggle" onclick="togglePasswordVisibility()">👁️</span>
             </div>
             <button type="submit">Login</button>
@@ -147,21 +144,6 @@ a {
                 errorMessage.textContent = "Username is required.";
                 return false;
             }
-
-            // Password validation
-            const passwordPattern = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[\W_]).{6,7}$/;
-
-            if (password === "") {
-                errorMessage.textContent = "Password is required.";
-                return false;
-            } else if (!passwordPattern.test(password)) {
-                errorMessage.textContent = "Password must be 6-7 characters, contain at least one uppercase letter, one number, and one special character.";
-                return false;
-            }
-
-            // Clear any previous error messages
-            errorMessage.textContent = "";
-            return true;  // Proceed with form submission
         }
 
         function togglePasswordVisibility() {
