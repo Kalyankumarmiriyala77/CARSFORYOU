@@ -22,11 +22,6 @@ function registerUser(event) {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
     const confirmPassword = document.getElementById("confirmPassword").value;
-    const errorMessage = document.getElementById('errorMessage');
-    if (fullname === "") {
-        errorMessage.textContent = "Full name is required.";
-        return false;
-    }
 
 
     if (password !== confirmPassword) {
