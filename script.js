@@ -15,7 +15,7 @@ const auth = firebase.auth();
 const db = firebase.firestore();
 
 function registerUser(event) {
-    event.preventDefault(); // Prevent form submission to server
+    event.preventDefault(); // Prevent form submission
 
     const fullname = document.getElementById("fullname").value;
     const email = document.getElementById("email").value;
@@ -38,9 +38,10 @@ function registerUser(event) {
         })
         .then(() => {
             alert("Registration Successful!");
-            window.location.href = "login.html"; // Redirect to login page
+            window.location.href = "login.html";
         })
         .catch(error => {
             document.getElementById("errorMessage").innerText = error.message;
+            console.error("Error:", error.message);
         });
 }
