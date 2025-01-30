@@ -23,7 +23,6 @@ function registerUser(event) {
     const password = document.getElementById("password").value;
     const confirmPassword = document.getElementById("confirmPassword").value;
 
-
     if (password !== confirmPassword) {
         document.getElementById("errorMessage").innerText = "Passwords do not match!";
         return;
@@ -44,28 +43,4 @@ function registerUser(event) {
         .catch(error => {
             document.getElementById("errorMessage").innerText = error.message;
         });
-        const passwordPattern = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[\W_]).{6,15}$/;
-        if (password === "") {
-            errorMessage.textContent = "Password is required.";
-            return false;
-        } else if (!passwordPattern.test(password)) {
-            errorMessage.textContent = "Password must be 6-15 characters, contain at least one uppercase letter, one number, and one special character.";
-            return false;
-        }
-
-        errorMessage.textContent = ""; // Clear any previous error messages
-        return true;
-    }
-
-    function togglePasswordVisibility(fieldId) {
-        const passwordField = document.getElementById(fieldId);
-        const toggleIcon = passwordField.nextElementSibling;
-
-        if (passwordField.type === "password") {
-            passwordField.type = "text";
-            toggleIcon.textContent = "🙈";  // Change icon to hide
-        } else {
-            passwordField.type = "password";
-            toggleIcon.textContent = "👁️";  // Change icon to show
-        }
 }
