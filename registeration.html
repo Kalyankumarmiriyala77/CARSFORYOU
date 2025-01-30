@@ -7,6 +7,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js"></script>
+    
     <script src="register.js"></script>
 
     <style>
@@ -136,12 +137,12 @@
             <div class="input-container">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="Enter your password">
-                <span class="password-toggle" onclick="togglePasswordVisibility('password')">👁️</span>
+               <!---- <span class="password-toggle" onclick="togglePasswordVisibility('password')">👁️</span> --> 
             </div>
             <div class="input-container">
                 <label for="confirmPassword">Confirm Password</label>
                 <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-enter your password">
-                <span class="password-toggle" onclick="togglePasswordVisibility('confirmPassword')">👁️</span>
+           <!----,     <span class="password-toggle" onclick="togglePasswordVisibility('confirmPassword')">👁️</span> -->
             </div>
             <button type="submit">Register</button>
             <p id="errorMessage"></p>
