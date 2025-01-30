@@ -7,7 +7,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js"></script>
-
+    <script src="script.js"></script>
     <style>
         :root {
             --primary-color:  #0a17b0c4;
@@ -149,67 +149,5 @@
             <a href="login.html">Login</a></p>
         </form>
     </div>
-    
-    <script>
-        function validateForm() {
-            const fullname = document.getElementById('fullname').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const username = document.getElementById('username').value.trim();
-            const password = document.getElementById('password').value.trim();
-            const confirmPassword = document.getElementById('confirmPassword').value.trim();
-            const errorMessage = document.getElementById('errorMessage');
-
-            // Fullname validation
-            if (fullname === "") {
-                errorMessage.textContent = "Full name is required.";
-                return false;
-            }
-
-            // Email validation
-            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            if (!emailPattern.test(email)) {
-                errorMessage.textContent = "Please enter a valid email address.";
-                return false;
-            }
-
-            // Username validation
-            if (username === "") {
-                errorMessage.textContent = "Username is required.";
-                return false;
-            }
-
-            // Password validation
-            const passwordPattern = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[\W_]).{6,15}$/;
-            if (password === "") {
-                errorMessage.textContent = "Password is required.";
-                return false;
-            } else if (!passwordPattern.test(password)) {
-                errorMessage.textContent = "Password must be 6-15 characters, contain at least one uppercase letter, one number, and one special character.";
-                return false;
-            }
-
-            // Confirm password validation
-            if (confirmPassword !== password) {
-                errorMessage.textContent = "Passwords do not match.";
-                return false;
-            }
-
-            errorMessage.textContent = ""; // Clear any previous error messages
-            return true;
-        }
-
-        function togglePasswordVisibility(fieldId) {
-            const passwordField = document.getElementById(fieldId);
-            const toggleIcon = passwordField.nextElementSibling;
-
-            if (passwordField.type === "password") {
-                passwordField.type = "text";
-                toggleIcon.textContent = "🙈";  // Change icon to hide
-            } else {
-                passwordField.type = "password";
-                toggleIcon.textContent = "👁️";  // Change icon to show
-            }
-        }
-    </script>
 </body>
 </html>
