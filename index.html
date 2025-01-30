@@ -342,22 +342,35 @@
   // Function to toggle navigation for small screens
   function toggleNav() {
     const nav = document.getElementById('nav');
-    nav.classList.toggle('active');
-  }
+    if (nav) {
+        nav.classList.toggle('active');
+    }
+}
 
-  // Function to handle loader and navigation
-   // Function to show loader when navigation links are clicked
-   document.querySelectorAll('nav a').forEach(link => {
-      link.addEventListener('click', () => {
-        const overlay = document.getElementById('overlay');
-        overlay.style.display = 'flex';
+// Function to show loader only for internal navigation
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', (event) => {
+            const overlay = document.getElementById('overlay');
+            if (!overlay) return; // Prevent errors if overlay is missing
 
-        // Simulate loading time (optional, for demonstration)
-        setTimeout(() => {
-          overlay.style.display = 'none';
-        }, 2000);
-      });
+            // Check if the link is navigating within the same page
+            const targetHref = link.getAttribute('href');
+
+            if (targetHref.startsWith('#') || targetHref === window.location.pathname) {
+                // Show loader only if navigating within the same page
+                overlay.style.display = 'flex';
+
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                }, 2000);
+
+                event.preventDefault(); // Prevent default only for same-page links
+            }
+        });
     });
+});
+
 </script>
 </body>
 </html>
