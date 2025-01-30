@@ -14,8 +14,8 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
 
-document.getElementById("registrationForm").addEventListener("submit", function(event) {
-    event.preventDefault();
+function registerUser(event) {
+    event.preventDefault(); // Prevent form submission to server
 
     const fullname = document.getElementById("fullname").value;
     const email = document.getElementById("email").value;
@@ -43,5 +43,4 @@ document.getElementById("registrationForm").addEventListener("submit", function(
         .catch(error => {
             document.getElementById("errorMessage").innerText = error.message;
         });
-});
-
+}
